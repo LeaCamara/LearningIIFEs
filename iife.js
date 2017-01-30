@@ -86,7 +86,7 @@ function(name) {
 // JS engine knows that anything inside () must be an expression 
 // it's sitting there, doing nothing, and you're not using it, but it's valid syntax
 
-// IIFE:
+// CLASSIC EXAMPLE OF AN IIFE:
 // a function expression wrapped in () so that the JS engine understands that I don't mean this to be my normal function statment. 
 // I mean this to be an expression, something that's created on the fly when this line of code is executed by adding the () at the end.
 // And you can pass values to it:
@@ -94,9 +94,30 @@ function(name) {
 var firstname = "John";
 
 (function(name) {
-	var greeting = "Hello";
+	var greeting = "Inside IIFE: Hello";
 	console.log(greeting + " " + name);
 }(firstname)); 
+// or })(firstname); 
+// in console, you see: 
+// Inside IIFE: Hello John
+
+// extremely useful & extremely common
+// will see this form and style in almost every major framework and library
+
+// wrapping function in () protects it from any other code that's included in your application
+
+// many frameworks & libraries wrap all of their code in IIFEs to keep it safe from colliding with other code
+
+// Here's how you could intentionally affect the global object if you wanted to:
+(function(global, name){
+	var greeting = "Hello";
+	global.greeting = "Hello";
+	console.log(greeting + " " + name);
+})(window, "John"); //IIFE
+ console.log(greeting);
+
+ // This ensures that, when you affect the global object, it's intentional.
+
 
 
 
